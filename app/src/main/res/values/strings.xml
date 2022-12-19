@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">proiect</string>
+
+    <string name="activity_main_button_login">Log in</string>
+    <string name="activity_main_button_signup">Sign up</string>
+    <string name="activity_main_button_help">Help</string>
+    <string name="activity_main_message">Lend a book! :)</string>
+
+    <string name="activity_sign_up_message">Create a new account by inserting data in the fields below.</string>
+    <string name="activity_sign_up_first_name">First name:</string>
+    <string name="activity_sign_up_first_name_value">Jane</string>
+    <string name="activity_sign_up_last_name">Last name:</string>
+    <string name="activity_sign_up_last_name_value">Doe</string>
+    <string name="activity_sign_up_user_type">User type:</string>
+    <string name="activity_sign_up_password">Password:</string>
+    <string name="activity_sign_up_password_value">************</string>
+    <string name="activity_sign_up_reenter_password">Reenter password:</string>
+    <string name="activity_sign_up_button_create_account">Create account</string>
+
+    <string name="email">Email:</string>
+    <string name="email_example">domain@email.com</string>
+    <string name="log_out">Log out</string>
+
+    <string name="activity_log_in_message">Enter log in credentials! :D</string>
+    <string name="activity_log_in_button">Log in</string>
+
+    <string name="activity_help_message">Library application rules</string>
+    <string name="activity_help_rules">
+        If a student does not return a book during the stated period of time, he is forbidden to lend new books until he returns the book and pays the fine.
+
+        When a student returns the borrowed book and pays the fine, he can request books again from his account.</string>
+
+    <string name="activity_books_message">Here you can search the books you want. ^_^</string>
+    <string name="activity_books_fab">Floating button which opens AddBookActivity.</string>
+
+    <string name="add_book_activity_message">Add new book to database</string>
+    <string name="add_book_activity_title">Title:</string>
+    <string name="add_book_activity_title_hint">Manastirea din Parma</string>
+    <string name="add_book_activity_author">Author:</string>
+    <string name="add_book_activity_author_hint">Stendhal</string>
+    <string name="add_book_activity_publisher">Publisher:</string>
+    <string name="add_book_activity_publisher_hint">Editura Rao</string>
+    <string name="add_book_activity_publication_date">Publication date:</string>
+    <string name="add_book_activity_publication_date_hint">January 1, 2004</string>
+    <string name="add_book_activity_genre">Genre:</string>
+    <string name="add_book_activity_genre_hint">literatura universala</string>
+    <string name="add_book_activity_ISBN10">ISBN10:</string>
+    <string name="add_book_activity_ISBN10_hint">9735766213</string>
+    <string name="add_book_activity_ISBN13">ISBN13:</string>
+    <string name="add_book_activity_ISBN13_hint">978–9735766214</string>
+    <string name="add_book_activity_button_save">Save</string>
+    <string name="add_book_activity_button_delete">Delete</string>
+
+    <string name="book_adapter_activity_button_edit_content_description">image button for adding/changing entry in database</string>
+    <string name="book_adapter_activity_button_delete_content_description">image button for deleting entry in database</string>
+
+    <string name="search_book_reader_activity_button_view_requests">Your book requests</string>
+    <string name="search_book_reader_activity_button_view_taxes">Your fines</string>
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFFFF"
+    android:paddingBottom="50dp"
+    android:paddingStart="@dimen/padding_start"
+    android:paddingEnd="@dimen/padding_end"
+    android:paddingTop="@dimen/margin_top_2"
+    tools:context="com.sma.proiect.reader.SearchBookReaderActivity">
+
+    <Button
+        android:id="@+id/bLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/log_out" />
+
+    <TextView
+        android:id="@+id/tStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bLogOut"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/activity_books_message"/>
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tStatus"
+        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginEnd="@dimen/margin_end"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_start"
+        android:paddingEnd="@dimen/padding_end"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/bRequests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/search_book_reader_activity_button_view_requests"
+            android:contentDescription=""
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/bDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.5"
+            android:text="@string/search_book_reader_activity_button_view_taxes"
+            android:contentDescription=""
+            style="?android:attr/buttonBarButtonStyle" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listPayments"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/menu"
+        android:layout_marginTop="@dimen/spacing"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"/>
+
+</RelativeLayout>
