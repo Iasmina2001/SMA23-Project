@@ -12,6 +12,8 @@ public class AppState {
     private DatabaseReference databaseReference;    // reference to Firebase used for reading and writing data
     private User currentUser;    // current user to be edited or deleted
     private Book currentBook;
+    private BookRequest currentBookRequest;
+    private boolean blockedAccount;
 
     public static synchronized AppState get() {
         if (singletonObject == null) {
@@ -36,6 +38,10 @@ public class AppState {
         return this.currentBook;
     }
 
+    public void setCurrentBookRequest(BookRequest currentBookRequest) { this.currentBookRequest = currentBookRequest; }
+
+    public BookRequest getCurrentBookRequest() { return this.currentBookRequest; }
+
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
@@ -52,5 +58,9 @@ public class AppState {
 
     public void setCanAttachDBListener(boolean canAttachListener) { canAttachDBListener = canAttachListener; }
 
-    public boolean canAttachDBListener() {return canAttachDBListener;}
+    public boolean canAttachDBListener() { return canAttachDBListener; }
+
+    public boolean isAccountBlocked() { return this.blockedAccount; }
+
+    public void blockAccount(boolean blockedAccount) { this.blockedAccount = blockedAccount; }
 }

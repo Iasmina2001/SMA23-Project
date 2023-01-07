@@ -5,31 +5,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFFFF"
+    android:background="@color/aqua"
     android:paddingBottom="50dp"
     android:paddingStart="@dimen/padding_start"
     android:paddingEnd="@dimen/padding_end"
     android:paddingTop="@dimen/margin_top_2"
     tools:context="com.sma.proiect.reader.SearchBookReaderActivity">
 
-    <Button
-        android:id="@+id/bLogOut"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_alignParentEnd="true"
-        android:text="@string/log_out" />
+        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginEnd="@dimen/margin_end"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_start"
+        android:paddingEnd="@dimen/padding_end"
+        android:weightSum="0.99" >
+
+        <ImageView
+            android:id="@+id/iAccountID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:paddingTop="12dp"
+            app:tint="@color/dark_aqua"
+            android:src="@drawable/account"
+            android:contentDescription="@string/search_book_reader_activity_notification">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/iNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_marginStart="50dp"
+            android:paddingTop="12dp"
+            app:tint="@color/dark_aqua"
+            android:src="@drawable/bell"
+            android:contentDescription="@string/search_book_reader_activity_notification">
+        </ImageView>
+
+        <Button
+            android:id="@+id/bLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_marginStart="50dp"
+            android:textSize="15sp"
+            android:text="@string/log_out" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bLogOut"
+        android:layout_below="@+id/menu"
         android:textSize="@dimen/text_size"
-        android:hint="@string/activity_books_message"/>
+        android:text="@string/activity_books_message"
+        android:textColor="@color/black" />
 
     <LinearLayout
-        android:id="@+id/menu"
+        android:id="@+id/menu2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tStatus"
@@ -52,7 +91,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/bDelete"
+            android:id="@+id/bFines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -63,10 +102,10 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listPayments"
+        android:id="@+id/listBooks"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_below="@+id/menu"
+        android:layout_below="@+id/menu2"
         android:layout_marginTop="@dimen/spacing"
         android:divider="@android:color/transparent"
         android:dividerHeight="4dp"/>

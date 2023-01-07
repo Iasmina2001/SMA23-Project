@@ -1,9 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".reader.BookAdapterReaderActivity">
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/aqua"
+    card_view:cardCornerRadius="@dimen/card_corner_radius">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/lHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_aqua"
+        android:padding="4dp">
+
+      <TextView
+          android:id="@+id/tTitle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@string/add_book_activity_title_hint"
+          android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lHeader"
+        android:padding="4dp">
+
+      <TextView
+          android:id="@+id/tAuthor"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/add_book_activity_author"
+          android:textColor="@color/black"/>
+
+      <TextView
+          android:id="@+id/tAuthorValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_author_hint"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tPublisher"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tAuthor"
+          android:text="@string/add_book_activity_publisher"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tPublisherValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tAuthorValue"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_publisher_hint"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tPublicationDate"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tPublisherValue"
+          android:text="@string/add_book_activity_publication_date"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tPublicationDateValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tPublisherValue"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_publication_date_hint"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tGenre"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tPublicationDate"
+          android:text="@string/add_book_activity_genre"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tGenreValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tPublicationDateValue"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_genre_hint"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tISBN10"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tGenre"
+          android:text="@string/add_book_activity_ISBN10"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tISBN10Value"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tGenreValue"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_ISBN10_hint"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tNumOfBooks"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tISBN10"
+          android:text="@string/add_book_activity_pieces"
+          android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/tNumOfBooksValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tISBN10"
+          android:layout_alignParentEnd="true"
+          android:text="@string/add_book_activity_pieces_hint"
+          android:textColor="@color/black" />
+
+      <LinearLayout
+          android:id="@+id/images"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tNumOfBooks"
+          android:layout_alignParentEnd="true" >
+
+        <ImageView
+            android:id="@+id/iAddReq"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/dark_aqua"
+            android:src="@drawable/ic_add"
+            android:contentDescription="@string/search_book_reader_activity_iAdd_description"/>
+
+        <ImageView
+            android:id="@+id/iDelete"
+            android:layout_marginStart="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/dark_aqua"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/search_book_reader_activity_iDelete_description" />
+      </LinearLayout>
+    </RelativeLayout>
+  </RelativeLayout>
+</androidx.cardview.widget.CardView>

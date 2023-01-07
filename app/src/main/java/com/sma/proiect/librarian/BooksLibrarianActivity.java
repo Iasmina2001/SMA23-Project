@@ -33,12 +33,13 @@ public class BooksLibrarianActivity extends AppCompatActivity {
         setContentView(R.layout.activity_books_librarian);
 
         FloatingActionButton fabAdd = findViewById(R.id.fabAdd);
-        ListView listPayments = findViewById(R.id.listPayments);
+        ListView listBooks = findViewById(R.id.listBooks);
+        Button bRequests = findViewById(R.id.bUserRequests);
         Button bLogOut = findViewById(R.id.bLogOut);
         DatabaseReference databaseReference = AppState.get().getDatabaseReference();
 
         final BookAdapterLibrarianActivity adapter = new BookAdapterLibrarianActivity(this, R.layout.activity_book_adapter_librarian, books);
-        listPayments.setAdapter(adapter);
+        listBooks.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +50,14 @@ public class BooksLibrarianActivity extends AppCompatActivity {
             }
         });
 
-        listPayments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        bRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BooksLibrarianActivity.this, BookRequestsLibrarianActivity.class));
+            }
+        });
+
+        listBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AppState.get().setCurrentBook(books.get(i));
@@ -74,7 +82,7 @@ public class BooksLibrarianActivity extends AppCompatActivity {
                     String publicationDate = null;
                     String genre = null;
                     String ISBN10 = null;
-                    String ISBN13 = null;
+                    String numOfBooks = null;
 
                     if (snapshot.child("Title").exists()) {
                         title = Objects.requireNonNull(snapshot.child("Title").getValue()).toString();
@@ -98,12 +106,12 @@ public class BooksLibrarianActivity extends AppCompatActivity {
 
                     ISBN10 = snapshot.getKey();
 
-                    if (snapshot.child("ISBN13").exists()) {
-                        ISBN13 = Objects.requireNonNull(snapshot.child("ISBN13").getValue()).toString();
+                    if (snapshot.child("Number of books").exists()) {
+                        numOfBooks = Objects.requireNonNull(snapshot.child("Number of books").getValue()).toString();
                     }
 
-                    if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && ISBN13 != null) {
-                        Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+                    if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && numOfBooks != null) {
+                        Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
                         books.add(book);
                     }
 
@@ -122,7 +130,7 @@ public class BooksLibrarianActivity extends AppCompatActivity {
                     String publicationDate = null;
                     String genre = null;
                     String ISBN10 = null;
-                    String ISBN13 = null;
+                    String numOfBooks = null;
 
                     if (snapshot.child("Title").exists()) {
                         title = Objects.requireNonNull(snapshot.child("Title").getValue()).toString();
@@ -146,12 +154,12 @@ public class BooksLibrarianActivity extends AppCompatActivity {
 
                     ISBN10 = snapshot.getKey();
 
-                    if (snapshot.child("ISBN13").exists()) {
-                        ISBN13 = Objects.requireNonNull(snapshot.child("ISBN13").getValue()).toString();
+                    if (snapshot.child("Number of books").exists()) {
+                        numOfBooks = Objects.requireNonNull(snapshot.child("Number of books").getValue()).toString();
                     }
 
-                    if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && ISBN13 != null) {
-                        Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+                    if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && numOfBooks != null) {
+                        Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
                         books.remove(AppState.get().getCurrentBook());
                         books.add(book);
                     }
@@ -169,7 +177,7 @@ public class BooksLibrarianActivity extends AppCompatActivity {
                 String publicationDate = null;
                 String genre = null;
                 String ISBN10 = null;
-                String ISBN13 = null;
+                String numOfBooks = null;
 
                 if (snapshot.child("Title").exists()) {
                     title = Objects.requireNonNull(snapshot.child("Title").getValue()).toString();
@@ -193,12 +201,12 @@ public class BooksLibrarianActivity extends AppCompatActivity {
 
                 ISBN10 = snapshot.getKey();
 
-                if (snapshot.child("ISBN13").exists()) {
-                    ISBN13 = Objects.requireNonNull(snapshot.child("ISBN13").getValue()).toString();
+                if (snapshot.child("Number of books").exists()) {
+                    numOfBooks = Objects.requireNonNull(snapshot.child("Number of books").getValue()).toString();
                 }
 
-                if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && ISBN13 != null) {
-                    Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+                if (title != null && author != null && publisher != null && publicationDate != null && genre != null && ISBN10 != null && numOfBooks != null) {
+                    Book book = new Book(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
                     books.remove(book);
                 }
                 adapter.notifyDataSetChanged();
@@ -218,5 +226,7 @@ public class BooksLibrarianActivity extends AppCompatActivity {
 
     public void signOut() {
         FirebaseAuth.getInstance().signOut();
+        AppState.get().setCurrentUser(null);
+        finish();
     }
 }

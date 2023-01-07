@@ -7,15 +7,15 @@ public class BookType {
         genre = genre.toLowerCase();
         switch (genre) {
             case "literatura universala":
-                return Color.rgb(200, 50, 50);
+                return Color.rgb(236, 131, 3);
             case "analiza matematica":
-                return Color.rgb(50, 150, 50);
+                return Color.rgb(236, 197, 3);
             case "geometrie":
-                return Color.rgb(20, 20, 150);
+                return Color.rgb(143, 228, 22);
             case "informatica":
-                return Color.rgb(230, 140, 0);
+                return Color.rgb(223, 42, 126);
             default:
-                return Color.rgb(100, 100, 100);
+                return Color.rgb(133, 153, 255);
         }
     }
 

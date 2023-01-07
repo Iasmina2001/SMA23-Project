@@ -75,10 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG_SU, "onAuthStateChanged:signed_in:" + user.getUid());
-                    AppState.get().setUserId(user.getUid());
-                    AppState.get().setCanAttachDBListener(true);
-                    attachDBListener(user.getUid());
+                    waitForDatabaseToLoad(new FirebaseCallback() {
+                        @Override
+                        public void onResponse(User currentUser) {
+                            Log.d(TAG_SU, "onAuthStateChanged:signed_in:" + user.getUid());
+                            AppState.get().setUserId(user.getUid());
+                            AppState.get().setCanAttachDBListener(true);
+                            AppState.get().setCurrentUser(currentUser);
+                        }
+                    }, user.getUid());
                 } else {
                     // User is signed out
                     Log.d(TAG_SU, "onAuthStateChanged:signed_out");
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                                         Log.d(TAG_SU, "Authentication successful");
                                                         if (task.isSuccessful()) {
                                                             // Sign in success, update UI with the signed-in user's information
-                                                            Log.d(TAG_SU, "signIn:success");
+                                                            Log.d(TAG_SU, "signUp:success");
                                                             FirebaseUser user = mAuth.getCurrentUser();
                                                             if (user != null) {
                                                                 Toast.makeText(MainActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
@@ -162,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                                         FirebaseUser user = mAuth.getCurrentUser();
                                                         if (user != null) {
                                                             User currentUser = AppState.get().getCurrentUser();    // aici e greseala :(; nu se citeste din firebase si nu seteaza user-ul in appState
+                                                            String currentUserUID = AppState.get().getUserID();
                                                             if (currentUser != null) {
                                                                 if (currentUser.getUserType().equals("librarian")) {
                                                                     startActivity(new Intent(MainActivity.this, BooksLibrarianActivity.class));
@@ -226,47 +232,28 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
     }
 
-    private void attachDBListener(String currentUserUID) {
+    private void waitForDatabaseToLoad(FirebaseCallback callback, String currentUserUID) {
         DatabaseReference databaseReference = AppState.get().getDatabaseReference();
-
-        databaseReference.child("users").child(currentUserUID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(String.format("users/%s", currentUserUID)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String firstName = null;
-                String lastName = null;
-                String userType = null;
-                String userID = null;
-
-                if (snapshot.child("First name").exists()) {
-                    firstName = Objects.requireNonNull(snapshot.child("First name").getValue()).toString();
-                }
-
-                if (snapshot.child("Last name").exists()) {
-                    lastName = Objects.requireNonNull(snapshot.child("Last name").getValue()).toString();
-                }
-
-                if (snapshot.child("User type").exists()) {
-                    userType = Objects.requireNonNull(snapshot.child("User type").getValue()).toString();
-                }
-
-                if (snapshot.child("User ID").exists()) {
-                    userID = Objects.requireNonNull(snapshot.child("User ID").getValue()).toString();
-                }
-
-                if (firstName != null && lastName != null && userType != null && userID != null) {
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    String firstName = Objects.requireNonNull(task.getResult().child("First name").getValue()).toString();
+                    String lastName = Objects.requireNonNull(task.getResult().child("Last name").getValue()).toString();
+                    String userType = Objects.requireNonNull(task.getResult().child("User type").getValue()).toString();
+                    String userID = Objects.requireNonNull(task.getResult().child("User ID").getValue()).toString();
+                    User user = null;
                     if (userType.equals("librarian")) {
-                        User user = new Librarian(firstName, lastName, userType, userID);
-                        AppState.get().setCurrentUser(user);
+                        user = new Librarian(firstName, lastName, userType, userID);
+                        startActivity(new Intent(MainActivity.this, BooksLibrarianActivity.class));
                     } else if (userType.equals("reader")) {
-                        User user = new Reader(firstName, lastName, userType, userID);
-                        AppState.get().setCurrentUser(user);
+                        user = new Reader(firstName, lastName, userType, userID);
+                        startActivity(new Intent(MainActivity.this, SearchBookReaderActivity.class));
                     }
+                    callback.onResponse(user);
+                } else {
+                    Log.d("DB attach", Objects.requireNonNull(task.getException()).getMessage());
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

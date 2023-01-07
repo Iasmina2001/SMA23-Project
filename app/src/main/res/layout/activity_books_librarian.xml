@@ -5,39 +5,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFFFF"
+    android:background="@color/aqua"
     android:paddingBottom="50dp"
     android:paddingStart="@dimen/padding_start"
     android:paddingEnd="@dimen/padding_end"
     android:paddingTop="@dimen/margin_top_2"
     tools:context="com.sma.proiect.librarian.BooksLibrarianActivity">
 
-    <Button
-        android:id="@+id/bLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_alignParentEnd="true"
-        android:text="@string/log_out" />
-
     <TextView
         android:id="@+id/tStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bLogOut"
         android:textSize="@dimen/text_size"
-        android:hint="@string/activity_books_message"/>
+        android:text="@string/activity_books_message"
+        android:textColor="@color/black" />
 
-    <ListView
-        android:id="@+id/listPayments"
+    <LinearLayout
+        android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tStatus"
+        android:layout_below="@id/tStatus"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/bUserRequests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="15sp"
+            android:text="@string/activity_books_requests"
+            style="?android:attr/buttonBarButtonStyle"/>
+        <Button
+            android:id="@+id/bLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="15sp"
+            android:text="@string/log_out"
+            style="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listBooks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menu"
         android:divider="@android:color/transparent"
         android:dividerHeight="4dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
+        app:tint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -46,5 +63,5 @@
         android:layout_gravity="end|bottom"
         android:contentDescription="@string/activity_books_fab"
         android:src="@drawable/ic_add"
-        app:backgroundTint="#03A9F4"/>
+        app:backgroundTint="@color/dark_aqua"/>
 </RelativeLayout>

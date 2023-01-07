@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aqua"
+    android:paddingBottom="50dp"
+    android:paddingStart="@dimen/padding_start"
+    android:paddingEnd="@dimen/padding_end"
+    android:paddingTop="@dimen/margin_top_2"
+    tools:context=".librarian.BookRequestsLibrarianActivity">
+
+    <TextView
+        android:id="@+id/tStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/black"
+        android:text="@string/fines_message"/>
+
+    <LinearLayout
+        android:id="@+id/endDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tStatus"
+        android:layout_marginTop="@dimen/spacing"
+        android:weightSum="1"
+        android:paddingStart="@dimen/padding_start"
+        android:paddingEnd="@dimen/padding_end">
+
+        <TextView
+            android:id="@+id/tFines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            android:text="@string/fines_cost"/>
+
+        <TextView
+            android:id="@+id/tFinesValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/fines_cost_value"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listBooks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/endDateLayout"
+        android:layout_marginTop="@dimen/spacing"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>

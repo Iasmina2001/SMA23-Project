@@ -25,13 +25,11 @@
     <string name="activity_log_in_button">Log in</string>
 
     <string name="activity_help_message">Library application rules</string>
-    <string name="activity_help_rules">
-        If a student does not return a book during the stated period of time, he is forbidden to lend new books until he returns the book and pays the fine.
-
-        When a student returns the borrowed book and pays the fine, he can request books again from his account.</string>
+    <string name="activity_help_rules">If a student does not return a book during the stated period of time, he is forbidden to lend new books until he returns the book and pays the fine. When a student returns the borrowed book and pays the fine, he can request books again from his account.</string>
 
     <string name="activity_books_message">Here you can search the books you want. ^_^</string>
     <string name="activity_books_fab">Floating button which opens AddBookActivity.</string>
+    <string name="activity_books_requests">Book requests</string>
 
     <string name="add_book_activity_message">Add new book to database</string>
     <string name="add_book_activity_title">Title:</string>
@@ -41,13 +39,13 @@
     <string name="add_book_activity_publisher">Publisher:</string>
     <string name="add_book_activity_publisher_hint">Editura Rao</string>
     <string name="add_book_activity_publication_date">Publication date:</string>
-    <string name="add_book_activity_publication_date_hint">January 1, 2004</string>
+    <string name="add_book_activity_publication_date_hint">01.01.2004</string>
     <string name="add_book_activity_genre">Genre:</string>
     <string name="add_book_activity_genre_hint">literatura universala</string>
     <string name="add_book_activity_ISBN10">ISBN10:</string>
     <string name="add_book_activity_ISBN10_hint">9735766213</string>
-    <string name="add_book_activity_ISBN13">ISBN13:</string>
-    <string name="add_book_activity_ISBN13_hint">978–9735766214</string>
+    <string name="add_book_activity_pieces">Number of books available:</string>
+    <string name="add_book_activity_pieces_hint">3</string>
     <string name="add_book_activity_button_save">Save</string>
     <string name="add_book_activity_button_delete">Delete</string>
 
@@ -56,4 +54,32 @@
 
     <string name="search_book_reader_activity_button_view_requests">Your book requests</string>
     <string name="search_book_reader_activity_button_view_taxes">Your fines</string>
+    <string name="search_book_reader_activity_iAdd_description">Add book request</string>
+    <string name="search_book_reader_activity_iDelete_description">Delete book request</string>
+    <string name="search_book_reader_activity_notification">Notification icon</string>
+
+    <string name="book_requests_activity_message">Here are your book requests.      ._.</string>
+    <string name="book_requests_activity_button_submit_requests">Submit book requests</string>
+    <string name="book_requests_activity_request_status">Request status</string>
+    <string name="book_requests_activity_request_status_value">Not submitted</string>
+
+    <string name="book_requests_librarian_activity">Here are the book requests from readers.</string>
+    <string name="book_requests_librarian_activity_fine">Fine</string>
+    <string name="book_requests_librarian_activity_fine_value">100</string>
+    <string name="book_requests_librarian_activity_ISBN10">ISBN10</string>
+    <string name="book_requests_librarian_activity_ISBN10_value">9735766213</string>
+    <string name="book_requests_librarian_activity_title_value">Manastirea din Parma</string>
+    <string name="book_requests_librarian_activity_user">User ID</string>
+    <string name="book_requests_librarian_activity_user_ID_value">gzWMdt2cKIOPJBfdPsCJ4usJHtx2</string>
+
+    <string name="book_request_adapter_librarian_activity_button_accept">Accept request</string>
+    <string name="book_request_adapter_librarian_activity_button_refuse">Refuse request</string>
+    <string name="book_request_adapter_librarian_activity_button_clear_fines">Clear fines and request</string>
+    <string name="book_request_adapter_librarian_activity_request_status_accepted">Accepted</string>
+
+    <string name="fines_message">Here are your accepted book requests. If you don\'t return books in time, your fines will be displayed here. Your account will be blocked if you don\'t return your books and pay the fine to the librarian.</string>
+    <string name="fines_end_date">End date</string>
+    <string name="fines_end_date_value">05.08.2023</string>
+    <string name="fines_cost">Fines total amount</string>
+    <string name="fines_cost_value">30 lei</string>
 </resources>

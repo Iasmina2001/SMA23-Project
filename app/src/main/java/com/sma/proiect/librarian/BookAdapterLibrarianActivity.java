@@ -40,7 +40,6 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
             itemHolder = new ItemHolder();
 
             view = inflater.inflate(layoutResID, parent, false);
-            itemHolder.tIndex = view.findViewById(R.id.tIndex);
             itemHolder.lHeader = view.findViewById(R.id.lHeader);
             itemHolder.iEdit = view.findViewById(R.id.iEdit);
             itemHolder.iDelete = view.findViewById(R.id.iDelete);
@@ -50,7 +49,7 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
             itemHolder.tPublicationDate = view.findViewById(R.id.tPublicationDateValue);
             itemHolder.tGenre = view.findViewById(R.id.tGenreValue);
             itemHolder.tISBN10 = view.findViewById(R.id.tISBN10Value);
-            itemHolder.tISBN13 = view.findViewById(R.id.tISBN13Value);
+            itemHolder.tNumOfBooks = view.findViewById(R.id.tNumOfBooksValue);
 
             view.setTag(itemHolder);
 
@@ -67,9 +66,8 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
         String publicationDate = bItem.getPublicationDate();
         String genre = bItem.getGenre();
         String ISBN10 = bItem.getISBN10();
-        String ISBN13 = bItem.getISBN13();
+        String numOfBooks = bItem.getNumOfBooks();
 
-        itemHolder.tIndex.setText(String.valueOf(position + 1));
         itemHolder.lHeader.setBackgroundColor(BookType.getColorFromBookGenre(bItem.getGenre()));
         itemHolder.tTitle.setText(bItem.getTitle());
         itemHolder.tAuthor.setText(bItem.getAuthor());
@@ -77,13 +75,13 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
         itemHolder.tPublicationDate.setText(bItem.getPublicationDate().toString());
         itemHolder.tGenre.setText(bItem.getGenre());
         itemHolder.tISBN10.setText(bItem.getISBN10());
-        itemHolder.tISBN13.setText(bItem.getISBN13());
+        itemHolder.tNumOfBooks.setText(bItem.getNumOfBooks());
 
         itemHolder.iEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // ... edit book at "position"
-                edit(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+                edit(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
             }
         });
 
@@ -98,15 +96,14 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
         return view;
     }
 
-    private static class ItemHolder {
-        TextView tIndex;
+    public static class ItemHolder {
         TextView tTitle;
         TextView tAuthor;
         TextView tPublisher;
         TextView tPublicationDate;
         TextView tGenre;
         TextView tISBN10;
-        TextView tISBN13;
+        TextView tNumOfBooks;
         RelativeLayout lHeader;
         ImageView iEdit, iDelete;
     }

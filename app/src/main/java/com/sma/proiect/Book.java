@@ -10,20 +10,33 @@ public class Book {
     private String publicationDate;
     private String genre;
     private String ISBN10;
-    private String ISBN13;
+    private String numOfBooks;
+    private String requestStatus;
 
     public Book() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Book(String title, String author, String publisher, String publicationDate, String genre, String ISBN10, String ISBN13) {
+    public Book(String title, String ISBN10) {
+        this.title = title;
+        this.ISBN10 = ISBN10;
+        this.author = "";
+        this.publisher = "";
+        this.publicationDate = "";
+        this.genre = "";
+        this.numOfBooks = "";
+        this.requestStatus = "0";    // 0 is for not submitted
+    }
+
+    public Book(String title, String author, String publisher, String publicationDate, String genre, String ISBN10, String numOfBooks) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.genre = genre;
         this.ISBN10 = ISBN10;
-        this.ISBN13 = ISBN13;
+        this.numOfBooks = numOfBooks;
+        this.requestStatus = "0";    // 0 is for not submitted
     }
 
     public String getTitle() {
@@ -50,9 +63,13 @@ public class Book {
         return this.ISBN10;
     }
 
-    public String getISBN13() {
-        return this.ISBN13;
+    public String getNumOfBooks() {
+        return this.numOfBooks;
     }
+
+    public String getRequestStatus() { return this.requestStatus; }
+
+    public void setRequestStatus(String requestStatus) { this.requestStatus = requestStatus; }
 
     @Override
     public boolean equals(Object o) {
@@ -61,11 +78,11 @@ public class Book {
         Book book = (Book) o;
         return title.equals(book.title) && author.equals(book.author) &&
                 publisher.equals(book.publisher) && publicationDate.equals(book.publicationDate) &&
-                genre.equals(book.genre) && ISBN10.equals(book.ISBN10) && ISBN13.equals(book.ISBN13);
+                genre.equals(book.genre) && ISBN10.equals(book.ISBN10) && numOfBooks.equals(book.numOfBooks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+        return Objects.hash(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
     }
 }

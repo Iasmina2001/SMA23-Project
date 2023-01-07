@@ -33,7 +33,7 @@ public class AddBookLibrarianActivity extends AppCompatActivity {
         EditText ePublicationDate = findViewById(R.id.ePublicationDateValue);
         Spinner sGenre = findViewById(R.id.sGenreValue);
         EditText eISBN10 = findViewById(R.id.eISBN10Value);
-        EditText eISBN13 = findViewById(R.id.eISBN13Value);
+        EditText eNumOfBooks = findViewById(R.id.ePiecesValue);
         Button bSave = findViewById(R.id.bSave);
         Button bDelete = findViewById(R.id.bDelete);
 
@@ -50,7 +50,7 @@ public class AddBookLibrarianActivity extends AppCompatActivity {
             ePublisher.setText(currentBook.getPublisher());
             ePublicationDate.setText(currentBook.getPublicationDate());
             eISBN10.setText(currentBook.getISBN10());
-            eISBN13.setText(currentBook.getISBN13());
+            eNumOfBooks.setText(currentBook.getNumOfBooks());
             try {
                 sGenre.setSelection(Arrays.asList(genres).indexOf(currentBook.getGenre()));
             } catch (Exception e) {
@@ -70,9 +70,9 @@ public class AddBookLibrarianActivity extends AppCompatActivity {
                 String publicationDate = ePublicationDate.getText().toString();
                 String genre = sGenre.getSelectedItem().toString();
                 String ISBN10 = eISBN10.getText().toString();
-                String ISBN13 = eISBN13.getText().toString();
+                String numOfBooks = eNumOfBooks.getText().toString();
 
-                save(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
+                save(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
             }
         });
 
@@ -93,14 +93,14 @@ public class AddBookLibrarianActivity extends AppCompatActivity {
         AppState.get().getDatabaseReference().child("books").child(ISBN10).removeValue();
     }
 
-    private void save(String title, String author, String publisher, String publicationDate, String genre, String ISBN10, String ISBN13) {
+    private void save(String title, String author, String publisher, String publicationDate, String genre, String ISBN10, String numOfBooks) {
         Map<String, Object> map = new HashMap<>();
         map.put("Title", title);
         map.put("Author", author);
         map.put("Publisher", publisher);
         map.put("Publication date", publicationDate);
         map.put("Genre", genre);
-        map.put("ISBN13", ISBN13);
+        map.put("Number of books", numOfBooks);
         AppState.get().getDatabaseReference().child("books").child(ISBN10).updateChildren(map);
     }
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/aqua"
     tools:context=".LogInActivity">
 
     <TextView
@@ -10,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activity_log_in_message"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size"
         android:layout_marginTop="@dimen/margin_top"
         android:layout_marginStart="@dimen/margin_start"
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/email"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size" />
 
         <EditText
@@ -44,6 +47,7 @@
             android:layout_weight="0.5"
             android:autofillHints=""
             android:hint="@string/email_example"
+            android:textColor="@color/black"
             android:inputType="textEmailAddress"
             android:minHeight="@dimen/min_height"
             android:textColorHint="#757575" />
@@ -68,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/activity_sign_up_password"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size" />
 
         <EditText
@@ -77,6 +82,7 @@
             android:layout_weight="0.5"
             android:hint="@string/activity_sign_up_password_value"
             android:autofillHints="@string/activity_sign_up_password_value"
+            android:textColor="@color/black"
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="@dimen/min_height" />
