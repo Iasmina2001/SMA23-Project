@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <item
+        android:id="@+id/nav_add_book_to_read"
+        android:title="Add book to read" />
+
+    <item
+        android:id="@+id/nav_add_book_to_currently_reading"
+        android:title="Add book to currently reading" />
+</menu>

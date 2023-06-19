@@ -88,11 +88,12 @@
         <ImageView
             android:id="@+id/iDelete"
             android:layout_marginStart="20dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_below="@id/requestLayout"
             android:layout_alignParentEnd="true"
-            android:background="@color/dark_aqua"
+            android:background="@android:color/transparent"
+            card_view:tint="@color/dark_aqua"
             android:src="@drawable/ic_delete"
             android:contentDescription="@string/search_book_reader_activity_iDelete_description" />
         </RelativeLayout>

@@ -1,113 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/aqua"
-    android:paddingBottom="50dp"
-    android:paddingStart="@dimen/padding_start"
-    android:paddingEnd="@dimen/padding_end"
-    android:paddingTop="@dimen/margin_top_2"
     tools:context="com.sma.proiect.reader.SearchBookReaderActivity">
 
-    <LinearLayout
-        android:id="@+id/menu"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="0.99" >
+        android:layout_height="match_parent"
+        android:background="@color/aqua"
+        android:paddingBottom="50dp" >
 
-        <ImageView
-            android:id="@+id/iAccountID"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_baseline_menu_24">
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:id="@+id/appContent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:paddingTop="12dp"
-            app:tint="@color/dark_aqua"
-            android:src="@drawable/account"
-            android:contentDescription="@string/search_book_reader_activity_notification">
-        </ImageView>
+            android:layout_below="@+id/appBar"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end">
 
-        <ImageView
-            android:id="@+id/iNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:layout_marginStart="50dp"
-            android:paddingTop="12dp"
-            app:tint="@color/dark_aqua"
-            android:src="@drawable/bell"
-            android:contentDescription="@string/search_book_reader_activity_notification">
-        </ImageView>
+            <TextView
+                android:id="@+id/tMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing"
+                android:text="@string/activity_books_message"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:paddingStart="@dimen/padding_start"
+                android:paddingEnd="@dimen/padding_end" />
 
-        <Button
-            android:id="@+id/bLogOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:layout_marginStart="50dp"
-            android:textSize="15sp"
-            android:text="@string/log_out" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/searchMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tMessage"
+                android:layout_marginTop="@dimen/spacing"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_start"
+                android:paddingEnd="@dimen/padding_end"
+                android:weightSum="1" >
+                <EditText
+                    android:id="@+id/eSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:hint="@string/activity_books_search" />
+                <Spinner
+                    android:id="@+id/sSearchSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:inputType="text"
+                    android:minWidth="@dimen/min_width"
+                    android:minHeight="@dimen/min_height"/>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/tStatus"
+            <ListView
+                android:id="@+id/listBooks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchMenu"
+                android:layout_marginTop="@dimen/spacing"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="4dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/menu"
-        android:textSize="@dimen/text_size"
-        android:text="@string/activity_books_message"
-        android:textColor="@color/black" />
-
-    <LinearLayout
-        android:id="@+id/menu2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tStatus"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1" >
-
-        <Button
-            android:id="@+id/bRequests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/search_book_reader_activity_button_view_requests"
-            android:contentDescription=""
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/bFines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_weight="0.5"
-            android:text="@string/search_book_reader_activity_button_view_taxes"
-            android:contentDescription=""
-            style="?android:attr/buttonBarButtonStyle" />
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listBooks"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_below="@+id/menu2"
-        android:layout_marginTop="@dimen/spacing"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="4dp"/>
-
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu_reader" >
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

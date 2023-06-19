@@ -1,289 +1,425 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/aqua"
     tools:context=".librarian.AddBookLibrarianActivity">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_book_activity_message"
-        android:textSize="@dimen/text_size"
-        android:layout_marginTop="@dimen/margin_top_medium"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:textColor="@color/black" />
-
-    <LinearLayout
-        android:id="@+id/titleLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/min_height"
-        android:layout_below="@+id/message"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
+        android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/tTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/message"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_title"
+            android:text="@string/add_book_activity_message"
             android:textSize="@dimen/text_size"
+            android:layout_marginTop="@dimen/margin_top_medium"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
             android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/eTitleValue"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/min_height"
+            android:layout_below="@+id/message"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_title"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/eTitleValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_title_hint"
+                android:autofillHints=""
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/authorLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_title_hint"
-            android:autofillHints=""
-            android:inputType="text"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height" />
-    </LinearLayout>
+            android:layout_below="@+id/titleLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1" >
 
-    <LinearLayout
-        android:id="@+id/authorLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleLayout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1" >
+            <TextView
+                android:id="@+id/tAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_author"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/tAuthor"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/eAuthorValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_author_hint"
+                android:inputType="text"
+                android:minHeight="@dimen/min_height"
+                android:autofillHints=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/publisherLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_author"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black"/>
+            android:layout_below="@+id/authorLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/eAuthorValue"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tPublisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_publisher"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/ePublisherValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_publisher_hint"
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height"
+                android:autofillHints=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/publicationDateLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_author_hint"
-            android:inputType="text"
-            android:minHeight="@dimen/min_height"
-            android:autofillHints=""/>
-    </LinearLayout>
+            android:layout_below="@+id/publisherLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-    <LinearLayout
-        android:id="@+id/publisherLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/authorLayout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
+            <TextView
+                android:id="@+id/tPublicationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_publication_date"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tPublisher"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/ePublicationDateValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_publication_date_hint"
+                android:ems="10"
+                android:inputType="date"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/genreLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_publisher"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black" />
+            android:layout_below="@+id/publicationDateLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/ePublisherValue"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:text="@string/add_book_activity_genre"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
+
+            <Spinner
+                android:id="@+id/sGenreValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_genre_hint"
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ISBN10Layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_publisher_hint"
-            android:inputType="text"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height"
-            android:autofillHints=""/>
-    </LinearLayout>
+            android:layout_below="@+id/genreLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-    <LinearLayout
-        android:id="@+id/publicationDateLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/publisherLayout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
+            <TextView
+                android:id="@+id/tISBN10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_ISBN10"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tPublicationDate"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/eISBN10Value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_ISBN10_hint"
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height"
+                android:autofillHints="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/piecesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ISBN10Layout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tPieces"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_pieces"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/ePiecesValue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:hint="@string/add_book_activity_pieces_hint"
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height"
+                android:autofillHints="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_publication_date"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black" />
+            android:layout_below="@+id/piecesLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/ePublicationDateValue"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:text="@string/add_book_activity_type"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black" />
+
+            <Spinner
+                android:id="@+id/sTypeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:inputType="text"
+                android:minWidth="@dimen/min_width"
+                android:minHeight="@dimen/min_height"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/browseEBookLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_publication_date_hint"
-            android:inputType="date"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height"
-            android:autofillHints="" />
-    </LinearLayout>
+            android:layout_below="@+id/typeLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-    <LinearLayout
-        android:id="@+id/genreLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/publicationDateLayout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
+            <Button
+                android:id="@+id/bBrowseEBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="10dp"
+                android:text="@string/add_book_activity_button_browse"
+                android:contentDescription="" />
 
-        <TextView
-            android:id="@+id/tGenre"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tEBookPath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginStart="10dp"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/dark_aqua" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/clearEBookLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_genre"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black" />
+            android:layout_below="@+id/browseEBookLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-        <Spinner
-            android:id="@+id/sGenreValue"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/bClearEBookFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="10dp"
+                android:text="@string/add_book_activity_button_clear_eBook"
+                android:contentDescription="" />
+
+            <TextView
+                android:id="@+id/tClearEBookPath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginStart="10dp"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/dark_aqua" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/browseEBookCoverLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_genre_hint"
-            android:inputType="text"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </LinearLayout>
+            android:layout_below="@+id/clearEBookLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1">
 
-    <LinearLayout
-        android:id="@+id/ISBN10Layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/genreLayout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
+            <Button
+                android:id="@+id/bBrowseEBookCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:layout_marginEnd="10dp"
+                android:text="@string/add_book_activity_button_browse_cover"
+                android:contentDescription="" />
 
-        <TextView
-            android:id="@+id/tISBN10"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/iEBookCover"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_weight="0.4"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/dark_aqua"
+                android:src="@drawable/book_cover"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/saveDelete"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_ISBN10"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black" />
+            android:layout_below="@+id/browseEBookCoverLayout"
+            android:layout_marginTop="@dimen/spacing"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:weightSum="1" >
+            <Button
+                android:id="@+id/bSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_button_save"
+                android:contentDescription="" />
 
-        <EditText
-            android:id="@+id/eISBN10Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_ISBN10_hint"
-            android:inputType="text"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height"
-            android:autofillHints="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ISBN13Layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ISBN10Layout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/tPieces"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_pieces"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/ePiecesValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:hint="@string/add_book_activity_pieces_hint"
-            android:inputType="text"
-            android:minWidth="@dimen/min_width"
-            android:minHeight="@dimen/min_height"
-            android:autofillHints="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/saveDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ISBN13Layout"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_start"
-        android:paddingEnd="@dimen/padding_end"
-        android:weightSum="1" >
-        <Button
-            android:id="@+id/bSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_button_save"
-            android:contentDescription="" />
-
-        <Button
-            android:id="@+id/bDelete"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/add_book_activity_button_delete"
-            android:contentDescription="" />
-    </LinearLayout>
-
-</RelativeLayout>
+            <Button
+                android:id="@+id/bDelete"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_book_activity_button_delete"
+                android:contentDescription="" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

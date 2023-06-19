@@ -20,11 +20,36 @@
         android:text="@string/book_requests_librarian_activity"
         android:textColor="@color/black" />
 
+    <LinearLayout
+        android:id="@+id/searchMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tStatus"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_start"
+        android:paddingEnd="@dimen/padding_end"
+        android:weightSum="1" >
+        <EditText
+            android:id="@+id/eSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:hint="@string/activity_book_requests_search" />
+        <Spinner
+            android:id="@+id/sSearchSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:inputType="text"
+            android:minWidth="@dimen/min_width"
+            android:minHeight="@dimen/min_height"/>
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listBooks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tStatus"
+        android:layout_below="@+id/searchMenu"
         android:layout_marginTop="@dimen/spacing"
         android:divider="@android:color/transparent"
         android:dividerHeight="4dp"/>

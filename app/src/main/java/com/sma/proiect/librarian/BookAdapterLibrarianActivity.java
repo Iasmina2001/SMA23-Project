@@ -2,7 +2,6 @@ package com.sma.proiect.librarian;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import com.sma.proiect.AppState;
 import com.sma.proiect.Book;
 import com.sma.proiect.BookType;
 import com.sma.proiect.R;
+import com.sma.proiect.helpers.DatabaseOperationHelper;
 import java.util.List;
 
 
@@ -22,6 +22,7 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
     private Context context;
     private List<Book> books;
     private int layoutResID;
+    private DatabaseOperationHelper databaseOperationHelper;
 
     public BookAdapterLibrarianActivity(Context context, int layoutResourceID, List<Book> books) {
         super(context, layoutResourceID, books);
@@ -77,19 +78,23 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
         itemHolder.tISBN10.setText(bItem.getISBN10());
         itemHolder.tNumOfBooks.setText(bItem.getNumOfBooks());
 
+        databaseOperationHelper = new DatabaseOperationHelper();
+
         itemHolder.iEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ... edit book at "position"
-                edit(title, author, publisher, publicationDate, genre, ISBN10, numOfBooks);
+                AppState.get().setCurrentBook(bItem);
+                // edit book at selected position
+                databaseOperationHelper.editBook(context);
             }
         });
 
         itemHolder.iDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ... delete book at "position"
-                delete(ISBN10);
+                // delete book at selected position
+                AppState.get().setCurrentBook(bItem);
+                databaseOperationHelper.deleteBook(context, ISBN10, "books");
             }
         });
 
@@ -106,16 +111,5 @@ public class BookAdapterLibrarianActivity extends ArrayAdapter<Book> {
         TextView tNumOfBooks;
         RelativeLayout lHeader;
         ImageView iEdit, iDelete;
-    }
-
-    private void delete(String ISBN10) {
-        AppState.get().getDatabaseReference().child("books").child(ISBN10).removeValue();
-    }
-
-    private void edit(String title, String author, String publisher, String publicationDate, String genre, String ISBN10, String ISBN13) {
-        Book currentBook = new Book(title, author, publisher, publicationDate, genre, ISBN10, ISBN13);
-
-        AppState.get().setCurrentBook(currentBook);
-        ((Activity)context).startActivity(new Intent(context.getApplicationContext(), AddBookLibrarianActivity.class));
     }
 }

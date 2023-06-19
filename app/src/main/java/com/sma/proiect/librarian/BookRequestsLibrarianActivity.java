@@ -1,22 +1,21 @@
 package com.sma.proiect.librarian;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import android.widget.Spinner;
 import com.google.firebase.database.DatabaseReference;
 import com.sma.proiect.AppState;
 import com.sma.proiect.BookRequest;
 import com.sma.proiect.R;
+import com.sma.proiect.helpers.DatabaseOperationHelper;
+import com.sma.proiect.helpers.SearchHelper;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class BookRequestsLibrarianActivity extends AppCompatActivity {
@@ -29,6 +28,14 @@ public class BookRequestsLibrarianActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_requests_librarian);
 
         ListView lBookRequests = findViewById(R.id.listBooks);
+        Spinner sSearchSpinner = findViewById(R.id.sSearchSpinner);
+        EditText eSearch = findViewById(R.id.eSearch);
+
+        SearchHelper searchHelper = new SearchHelper();
+        List<BookRequest> tempBookRequests = new ArrayList<>();
+        ArrayAdapter<String> searchTypeAdapter = new ArrayAdapter<>(BookRequestsLibrarianActivity.this, android.R.layout.simple_spinner_item, new String[]{"Title", "ISBN", "User ID", "Unreturned books"});
+        searchTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sSearchSpinner.setAdapter(searchTypeAdapter);
 
         final BookRequestsAdapterLibrarianActivity adapter = new BookRequestsAdapterLibrarianActivity(this, R.layout.activity_book_requests_adapter_librarian, bookRequests);
         lBookRequests.setAdapter(adapter);
@@ -41,182 +48,62 @@ public class BookRequestsLibrarianActivity extends AppCompatActivity {
             }
         });
 
-        DatabaseReference databaseReference = AppState.get().getDatabaseReference();
-        databaseReference.child("bookRequests").addChildEventListener(new ChildEventListener() {
+        eSearch.addTextChangedListener(
+                searchHelper.addTextWatcherToBookRequestListForLibrarian(
+                        BookRequestsLibrarianActivity.this,
+                        eSearch,
+                        sSearchSpinner,
+                        bookRequests,
+                        tempBookRequests,
+                        lBookRequests
+                )
+        );
+
+        sSearchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                try {
-                    String ISBN10 = null;
-                    String sSubmitted = null;
-                    String sFine;
-                    String sTitle = null;
-                    String sCurrentUserID = snapshot.getKey();
-                    String startDate = null;
-                    String endDate = null;
-                    String requestStatus;
-                    BookRequest bookRequestObject;
-
-                    if (!snapshot.child("Fine").exists()) {
-                        databaseReference.child("bookRequests").child(sCurrentUserID).child("Fine").setValue(0);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
+                if (selectedItem.equals("Unreturned books")) {
+                    tempBookRequests.clear();
+                    for (int j = 0; j < bookRequests.size(); j++) {
+                        BookRequest currentElement = bookRequests.get(j);
+                        String sCurrentFine = currentElement.getFine();
+                        long lCurrentFine = 0;
+                        try {
+                            lCurrentFine = Long.parseLong(sCurrentFine);
+                        } catch (NumberFormatException nfe) {
+                            // :)
+                        }
+                        if (lCurrentFine > 0) {
+                            tempBookRequests.add(currentElement);
+                        }
                     }
-
-                    sFine = Objects.requireNonNull(snapshot.child("Fine").getValue()).toString();
-
-                    for (DataSnapshot bookRequest: snapshot.getChildren()) {
-                        ISBN10 = bookRequest.getKey();
-                        sTitle = bookRequest.child("Title").getValue().toString();
-                        sSubmitted = bookRequest.child("Submitted").getValue().toString();
-
-                        if (bookRequest.child("Start date").exists()) {
-                            startDate = Objects.requireNonNull(bookRequest.child("Start date").getValue()).toString();
-                        }
-
-                        if (bookRequest.child("End date").exists()) {
-                            endDate = Objects.requireNonNull(bookRequest.child("End date").getValue()).toString();
-                        }
-
-                        if (startDate != null && endDate != null) {
-                            requestStatus = "1";
-                        } else {
-                            requestStatus = "0";
-                        }
-
-                        bookRequestObject = new BookRequest(sFine, ISBN10, sTitle, sCurrentUserID, sSubmitted, requestStatus);
-                        bookRequests.add(bookRequestObject);
-                        adapter.notifyDataSetChanged();
-                    }
-                } catch (Exception e) {
-                    // :)
+                    BookRequestsAdapterLibrarianActivity searchAdapter = new BookRequestsAdapterLibrarianActivity(BookRequestsLibrarianActivity.this, R.layout.activity_book_requests_adapter_librarian, tempBookRequests);
+                    lBookRequests.setAdapter(searchAdapter);
+                    searchAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                try {
-                    String ISBN10 = null;
-                    String sSubmitted = null;
-                    String sFine;
-                    String sTitle = null;
-                    String sCurrentUserID = snapshot.getKey();
-                    String startDate = null;
-                    String endDate = null;
-                    String requestStatus;
-                    BookRequest bookRequestObject;
-
-                    bookRequests.clear();
-
-                    if (!snapshot.child("Fine").exists()) {
-                        databaseReference.child("bookRequests").child(sCurrentUserID).child("Fine").setValue(0);
-                    }
-
-                    sFine = Objects.requireNonNull(snapshot.child("Fine").getValue()).toString();
-
-                    for (DataSnapshot bookRequest: snapshot.getChildren()) {
-                        ISBN10 = bookRequest.getKey();
-                        sTitle = bookRequest.child("Title").getValue().toString();
-                        sSubmitted = bookRequest.child("Submitted").getValue().toString();
-
-                        startDate = null;
-                        endDate = null;
-                        if (bookRequest.child("Start date").exists()) {
-                            startDate = Objects.requireNonNull(bookRequest.child("Start date").getValue()).toString();
-                        }
-
-                        if (bookRequest.child("End date").exists()) {
-                            endDate = Objects.requireNonNull(bookRequest.child("End date").getValue()).toString();
-                        }
-
-                        if (startDate != null && endDate != null) {
-                            requestStatus = "1";
-                        } else {
-                            requestStatus = "0";
-                        }
-
-                        bookRequestObject = new BookRequest(sFine, ISBN10, sTitle, sCurrentUserID, sSubmitted, requestStatus);
-                        bookRequests.add(bookRequestObject);
-                        adapter.notifyDataSetChanged();
-                    }
-                } catch (Exception e) {
-                    // :)
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                try {
-                    String ISBN10 = null;
-                    String sSubmitted = null;
-                    String sFine;
-                    String sTitle = null;
-                    String sCurrentUserID = snapshot.getKey();
-                    String startDate = null;
-                    String endDate = null;
-                    String requestStatus;
-                    BookRequest bookRequestObject;
-
-                    bookRequests.clear();
-
-                    if (!snapshot.child("Fine").exists()) {
-                        databaseReference.child("bookRequests").child(sCurrentUserID).child("Fine").setValue(0);
-                    }
-
-                    sFine = Objects.requireNonNull(snapshot.child("Fine").getValue()).toString();
-
-                    for (DataSnapshot bookRequest: snapshot.getChildren()) {
-                        ISBN10 = bookRequest.getKey();
-                        sTitle = bookRequest.child("Title").getValue().toString();
-                        sSubmitted = bookRequest.child("Submitted").getValue().toString();
-
-                        startDate = null;
-                        endDate = null;
-                        if (bookRequest.child("Start date").exists()) {
-                            startDate = Objects.requireNonNull(bookRequest.child("Start date").getValue()).toString();
-                        }
-
-                        if (bookRequest.child("End date").exists()) {
-                            endDate = Objects.requireNonNull(bookRequest.child("End date").getValue()).toString();
-                        }
-
-                        if (startDate != null && endDate != null) {
-                            requestStatus = "1";
-                        } else {
-                            requestStatus = "0";
-                        }
-
-                        bookRequestObject = new BookRequest(sFine, ISBN10, sTitle, sCurrentUserID, sSubmitted, requestStatus);
-                        bookRequests.add(bookRequestObject);
-                        adapter.notifyDataSetChanged();
-                    }
-                } catch (Exception e) {
-                    // :)
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-    }
 
-    /**
-     * The function deletes the not updated book requests from the arraylist.
-     * @param ISBN10: Given ISBN10, the book requests that have not been submitted are deleted from
-     *              the book list.
-     */
-    private void removeBookRequestWithGivenISBN10(String ISBN10) {
-        for (int i = 0; i < bookRequests.size(); i++) {
-            BookRequest currentBook = bookRequests.get(i);
-            String currentBookISBN10 = currentBook.getISBN10();
-            if (currentBookISBN10.equals(ISBN10)) {
-                bookRequests.remove(currentBook);
-                break;
-            }
-        }
+        DatabaseOperationHelper databaseOperationHelper = new DatabaseOperationHelper();
+        DatabaseReference databaseReference = AppState.get().getDatabaseReference();
+
+        // check user accounts if there are overdue book requests
+        // if there are overdue book requests, block the account and calculate the fine
+        databaseOperationHelper.checkFineAndAccessForUsers();
+
+        // after checking the accounts, display the book requests
+        databaseReference.child("bookRequests").addChildEventListener(
+                databaseOperationHelper.displayBookRequests(
+                        databaseReference,
+                        bookRequests,
+                        adapter
+                )
+        );
     }
 }

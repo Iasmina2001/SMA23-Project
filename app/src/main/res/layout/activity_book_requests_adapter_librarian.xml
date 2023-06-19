@@ -152,22 +152,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/requestStatusLayout"
-            android:weightSum="1"
+            android:weightSum="0.9"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/bAcceptReq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:text="@string/book_request_adapter_librarian_activity_button_accept"
                 style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/bClearRequest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/book_request_adapter_librarian_activity_button_clear_book_returned_in_time"
+                style="?android:attr/buttonBarButtonStyle"/>
 
             <Button
                 android:id="@+id/bClearFines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:text="@string/book_request_adapter_librarian_activity_button_clear_fines"
                 style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>

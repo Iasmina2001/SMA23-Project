@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.firebase.database.DatabaseReference;
+import android.widget.Toast;
 import com.sma.proiect.AppState;
 import com.sma.proiect.Book;
 import com.sma.proiect.R;
+import com.sma.proiect.helpers.DatabaseOperationHelper;
 import com.sma.proiect.user.User;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class BookRequestsAdapterActivity extends ArrayAdapter<Book> {
         final Book bItem = books.get(position);
         String ISBN10 = bItem.getISBN10();
         String title = bItem.getTitle();
-        String requestStatus = bItem.getRequestStatus();
+        String requestStatus = bItem.getSubmitStatus();
 
         itemHolder.tTitle.setText(title);
         itemHolder.ISBN10.setText(ISBN10);
@@ -65,13 +66,19 @@ public class BookRequestsAdapterActivity extends ArrayAdapter<Book> {
         } else {
             itemHolder.tRequestStatus.setText("Submitted");
         }
+
         User currentUser = AppState.get().getCurrentUser();
+        DatabaseOperationHelper databaseOperationHelper = new DatabaseOperationHelper();
 
         itemHolder.iDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ... delete book request at "position"
-                deleteBookRequest(currentUser, ISBN10);
+                // delete book request at position
+                if (itemHolder.tRequestStatus.getText().toString().equals("Not submitted")) {
+                    databaseOperationHelper.deleteBookRequest(currentUser, ISBN10);
+                } else {
+                    Toast.makeText(context, "Cannot delete submitted requests.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -83,11 +90,5 @@ public class BookRequestsAdapterActivity extends ArrayAdapter<Book> {
         TextView ISBN10;
         TextView tRequestStatus;
         ImageView iDelete;
-    }
-
-    private void deleteBookRequest(User currentUser, String ISBN10) {
-        String currentUserUID = currentUser.getUserID();
-        DatabaseReference databaseReference = AppState.get().getDatabaseReference();
-        databaseReference.child("bookRequests").child(currentUserUID).child(ISBN10).removeValue();
     }
 }

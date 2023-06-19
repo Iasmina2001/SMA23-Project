@@ -43,6 +43,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
 
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -53,6 +56,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.google.android.libraries.play.games:inputmapping:+'
 
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
@@ -60,4 +66,25 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.appcompat:appcompat:1.5.1'
+
+    implementation 'com.google.android.material:material:1.3.0-alpha03'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    // https://mavenlibs.com/maven/dependency/eu.freme-project/epublib-core
+    implementation ('eu.freme-project:epublib-core:0.5') {
+        exclude group: 'org.slf4j'
+        exclude group: 'xmlpull'
+    }
+    implementation 'org.slf4j:slf4j-android:1.7.25'
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    /*implementation 'com.folioreader:folioreader:0.5.4' //this is just the updated version as of now
+    implementation 'com.android.support:multidex:1.0.3' // (for androidx)
+    configurations.matching { it.name == '_internal_aapt2_binary' }.all {
+        config -> config.resolutionStrategy.eachDependency {
+            details -> details.useVersion("3.3.2-5309881")
+        }
+    }*/
 }

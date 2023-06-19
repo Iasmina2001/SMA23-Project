@@ -1,8 +1,8 @@
 package com.sma.proiect;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
 
 public class HelpActivity extends AppCompatActivity {
 

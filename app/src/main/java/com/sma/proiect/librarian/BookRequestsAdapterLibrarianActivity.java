@@ -9,16 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import com.google.firebase.database.DatabaseReference;
+import android.widget.Toast;
 import com.sma.proiect.AppState;
-import com.sma.proiect.Book;
 import com.sma.proiect.BookRequest;
 import com.sma.proiect.R;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import com.sma.proiect.helpers.DatabaseOperationHelper;
 import java.util.List;
-import java.util.Locale;
 
 
 public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookRequest> {
@@ -26,6 +22,7 @@ public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookReque
     private Context context;
     private List<BookRequest> bookRequests;
     private int layoutResID;
+    private DatabaseOperationHelper databaseOperationHelper;
 
     public BookRequestsAdapterLibrarianActivity(Context context, int layoutResourceID, List<BookRequest> bookRequests) {
         super(context, layoutResourceID, bookRequests);
@@ -46,7 +43,8 @@ public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookReque
 
             view = inflater.inflate(layoutResID, parent, false);
             itemHolder.bAccept = view.findViewById(R.id.bAcceptReq);
-            itemHolder.bClearFinesAndRequest = view.findViewById(R.id.bClearFines);
+            itemHolder.bClearFines = view.findViewById(R.id.bClearFines);
+            itemHolder.bClearRequest = view.findViewById(R.id.bClearRequest);
             itemHolder.tTitle = view.findViewById(R.id.tTitle);
             itemHolder.tISBN10 = view.findViewById(R.id.tISBN10Value);
             itemHolder.tUserID = view.findViewById(R.id.tUserIDValue);
@@ -67,7 +65,14 @@ public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookReque
         String fine = bItem.getFine();
         String userID = bItem.getCurrentUID();
         String requestStatus = bItem.getRequestStatus();
-        BookRequest currentBookRequest = new BookRequest(fine, ISBN10, title, userID, "1", requestStatus);
+        BookRequest currentBookRequest = new BookRequest(
+                fine,
+                ISBN10,
+                title,
+                userID,
+                "1",
+                requestStatus
+        );
 
         itemHolder.tTitle.setText(title);
         itemHolder.tISBN10.setText(ISBN10);
@@ -79,20 +84,61 @@ public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookReque
             itemHolder.tRequestStatus.setText("Accepted");
         }
 
+        databaseOperationHelper = new DatabaseOperationHelper();
+
         itemHolder.bAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // accept request
-                acceptRequest(0, userID, ISBN10);
+                AppState.get().setCurrentBookRequest(currentBookRequest);
+                int iFine = 0;
+
+                try {
+                    iFine = Integer.parseInt(itemHolder.tFine.getText().toString());
+                } catch(NumberFormatException nfe) {
+                    // :)
+                }
+
+                if (iFine > 0) {
+                    Toast.makeText(context.getApplicationContext(), "Cannot accept book requests from readers with fines.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (itemHolder.tRequestStatus.getText().toString().equals("Not accepted")) {
+                        // reader has two weeks to return the book
+                        databaseOperationHelper.acceptRequest(14);
+                    } else {
+                        Toast.makeText(context.getApplicationContext(), "You have already accepted the book request.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
-        itemHolder.bClearFinesAndRequest.setOnClickListener(new View.OnClickListener() {
+        itemHolder.bClearRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // clear fines and book request
                 AppState.get().setCurrentBookRequest(currentBookRequest);
-                clearFinesAndRequest(ISBN10, userID, currentBookRequest);
+                int iFine = 0;
+
+                try {
+                    iFine = Integer.parseInt(itemHolder.tFine.getText().toString());
+                } catch(NumberFormatException nfe) {
+                    // :)
+                }
+
+                if (iFine > 0) {
+                    Toast.makeText(context.getApplicationContext(), "Cannot delete requests from users with fines.", Toast.LENGTH_SHORT).show();
+                } else {
+                    databaseOperationHelper.clearBookRequestReturnedInTime(context, userID, ISBN10);
+                }
+            }
+        });
+
+        itemHolder.bClearFines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // clear fines and late unreturned book requests only if the reader returns all books
+                AppState.get().setCurrentBookRequest(currentBookRequest);
+                databaseOperationHelper.clearUnreturnedLateBookRequestsForCurrentUser(context, userID);
+                databaseOperationHelper.clearFinesAndAllowAccessToAccount(userID);
             }
         });
 
@@ -105,44 +151,6 @@ public class BookRequestsAdapterLibrarianActivity extends ArrayAdapter<BookReque
         TextView tFine;
         TextView tUserID;
         TextView tRequestStatus;
-        Button bAccept, bClearFinesAndRequest;
-    }
-
-    private void acceptRequest(int days, String readerID, String ISBN10) {
-    /**
-     * @param days: number of days within the reader must return the book to the library
-     * The function calculates the start date and the end date for a borrow and adds the dates
-     * for each book to Firebase.
-     */
-        String dateFormat = "dd.mm.yyyy";
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat s = new SimpleDateFormat(dateFormat, Locale.getDefault());
-        String startDate = s.format(new Date(cal.getTimeInMillis()));
-        cal.add(Calendar.DAY_OF_YEAR, days);
-        String endDate = s.format(new Date(cal.getTimeInMillis()));
-
-        DatabaseReference databaseReference = AppState.get().getDatabaseReference();
-
-        for (int i = 0; i < bookRequests.size(); i++) {
-            BookRequest currentBook = bookRequests.get(i);
-            String currentBookISBN10 = currentBook.getISBN10();
-            if (currentBookISBN10.equals(ISBN10)) {
-                databaseReference.child("bookRequests").child(readerID).child(ISBN10).child("Start date").setValue(startDate);
-                databaseReference.child("bookRequests").child(readerID).child(ISBN10).child("End date").setValue(endDate);
-            }
-        }
-    }
-
-    /**
-     * The librarian clears the request if the reader returns the lent book in time.
-     * Another situation in which the librarian clears the request is when the reader returned late
-     * the book, but payed his fines.
-     */
-    private void clearFinesAndRequest(String ISBN10, String readerID, BookRequest currentBookRequest) {
-        DatabaseReference databaseReference = AppState.get().getDatabaseReference();
-        databaseReference.child("bookRequests").child(readerID).child(ISBN10).removeValue();
-        databaseReference.child("bookRequests").child(readerID).child("Fine").setValue(0);
-        databaseReference.child("bookRequests").child(readerID).child("Forbid access").removeValue();
-        AppState.get().setCurrentBookRequest(currentBookRequest);
+        Button bAccept, bClearFines, bClearRequest;
     }
 }

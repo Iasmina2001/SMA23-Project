@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <item
+        android:id="@+id/nav_set_book_as_finished"
+        android:title="Set book as finished" />
+
+    <item
+        android:id="@+id/nav_view_ebook"
+        android:title="View eBook" />
+</menu>

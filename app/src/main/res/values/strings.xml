@@ -20,6 +20,7 @@
     <string name="email">Email:</string>
     <string name="email_example">domain@email.com</string>
     <string name="log_out">Log out</string>
+    <string name="book_inventory">Add book to inventory</string>
 
     <string name="activity_log_in_message">Enter log in credentials! :D</string>
     <string name="activity_log_in_button">Log in</string>
@@ -27,13 +28,15 @@
     <string name="activity_help_message">Library application rules</string>
     <string name="activity_help_rules">If a student does not return a book during the stated period of time, he is forbidden to lend new books until he returns the book and pays the fine. When a student returns the borrowed book and pays the fine, he can request books again from his account.</string>
 
-    <string name="activity_books_message">Here you can search the books you want. ^_^</string>
+    <string name="activity_books_message">Search books by title or ISBN. ^_^</string>
+    <string name="activity_books_search">Title / ISBN</string>
+    <string name="activity_book_requests_search">Title / ISBN / User ID</string>
     <string name="activity_books_fab">Floating button which opens AddBookActivity.</string>
     <string name="activity_books_requests">Book requests</string>
 
     <string name="add_book_activity_message">Add new book to database</string>
     <string name="add_book_activity_title">Title:</string>
-    <string name="add_book_activity_title_hint">Manastirea din Parma</string>
+    <string name="add_book_activity_title_hint">Armance</string>
     <string name="add_book_activity_author">Author:</string>
     <string name="add_book_activity_author_hint">Stendhal</string>
     <string name="add_book_activity_publisher">Publisher:</string>
@@ -45,6 +48,11 @@
     <string name="add_book_activity_ISBN10">ISBN10:</string>
     <string name="add_book_activity_ISBN10_hint">9735766213</string>
     <string name="add_book_activity_pieces">Number of books available:</string>
+    <string name="add_book_activity_type">Type:</string>
+    <string name="add_book_activity_type_value">eBook / paper book</string>
+    <string name="add_book_activity_button_browse">Browse eBook file</string>
+    <string name="add_book_activity_button_clear_eBook">Clear eBook file</string>
+    <string name="add_book_activity_button_browse_cover">Browse book cover</string>
     <string name="add_book_activity_pieces_hint">3</string>
     <string name="add_book_activity_button_save">Save</string>
     <string name="add_book_activity_button_delete">Delete</string>
@@ -74,12 +82,44 @@
 
     <string name="book_request_adapter_librarian_activity_button_accept">Accept request</string>
     <string name="book_request_adapter_librarian_activity_button_refuse">Refuse request</string>
-    <string name="book_request_adapter_librarian_activity_button_clear_fines">Clear fines and request</string>
+    <string name="book_request_adapter_librarian_activity_button_clear_fines">Clear fines</string>
     <string name="book_request_adapter_librarian_activity_request_status_accepted">Accepted</string>
+    <string name="book_request_adapter_librarian_activity_button_clear_book_returned_in_time">Clear request</string>
 
     <string name="fines_message">Here are your accepted book requests. If you don\'t return books in time, your fines will be displayed here. Your account will be blocked if you don\'t return your books and pay the fine to the librarian.</string>
     <string name="fines_end_date">End date</string>
     <string name="fines_end_date_value">05.08.2023</string>
     <string name="fines_cost">Fines total amount</string>
-    <string name="fines_cost_value">30 lei</string>
+    <string name="fines_cost_value">0 lei</string>
+
+    <string name="grid_item_choose_book_reader_book">Book</string>
+    <string name="grid_item_choose_book_reader_eBook">eBook</string>
+
+    <string name="activity_choose_book_reader_message">What do you want to do next? :)</string>
+
+    <string name="activity_ebook_adapter_reader_button">Borrow ebook</string>
+
+    <string name="activity_borrowed_ebooks">Here are your borrowed eBooks</string>
+
+    <string name="activity_borrowed_ebook_grid_adapter_title">Armance</string>
+    <string name="activity_borrowed_ebook_grid_adapter_author">Stendhal</string>
+
+    <string name="activity_reading_challenge_title">Annual reading challenge</string>
+    <string name="activity_reading_challenge_button">Add reading challenge</string>
+    <string name="activity_reading_challenge_button_edit_goal">Edit goal</string>
+    <string name="activity_rate_books_t_read_books">Read books</string>
+    <string name="activity_rate_books_t_currently_reading_books">Currently reading books</string>
+    <string name="activity_rate_books_search_text_hint">Search books by title</string>
+
+    <string name="activity_read_books_message">Here are your book ratings. You can add and edit ratings to each read book.</string>
+
+    <string name="activity_currently_reading_books_message">Here are the books you are currently reading.</string>
+
+    <string name="activity_add_rating_message">Give the book a grade! :)</string>
+    <string name="activity_add_rating_button">Submit rating</string>
+
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="loading">loading...</string>
 </resources>

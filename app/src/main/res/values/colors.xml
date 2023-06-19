@@ -8,7 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#00B0FF</color>
-    <color name="aqua">#91FACC</color>
+    <color name="aqua">#C6FDE5</color>
+    <color name="aqua2">#91FACC</color>
+    <color name="aqua3">#B2FDDD</color>
     <color name="dark_aqua">#009E67</color>
     <color name="carraibean">#07C5DD</color>
     <color name="green2">#3BD16D</color>
@@ -18,4 +20,11 @@
     <color name="light_green">#8FE416</color>
     <color name="pink">#DF2A7E</color>
     <color name="violet">#8599FF</color>
+    <color name="avocado">#568203</color>
+    <color name="pistachio">#B9DCA2</color>
+    <color name="granny_smith_apple">#D4FDCF</color>
+    <color name="apple_green">#8DB600</color>
+    <color name="olive_green">#708238</color>
+    <color name="ocean_green">#48BF91</color>
+    <color name="mint_green">#98FB98</color>
 </resources>
